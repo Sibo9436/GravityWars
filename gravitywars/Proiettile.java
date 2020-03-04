@@ -9,14 +9,16 @@ import java.awt.Dimension;
 
 public class Proiettile extends JComponent
 {
-  private static float G = 1e8f;
+  private static float G = 1e12f;
   private static float _m= 100;
+  private int  _px=0;
+  private int  _py=0;
   private int  _x=0;
   private int  _y=0;
   private int  _vx=0;
   private int  _vy=0;
-  private int  _ax=0;
-  private int  _ay=0;
+  private float  _ax=0;
+  private float  _ay=0;
 
   private boolean is = false;
 
@@ -52,8 +54,8 @@ public class Proiettile extends JComponent
       fx += forza*cost;
       fy += forza*sint;
     }
-    _ax += (int)(-fx/_m);
-    _ay += (int)(-fy/_m);
+    _ax += (-fx/(_m));
+    _ay += (-fy/(_m));
     System.out.println("ax: "+_ax+" ay: "+_ay);
   }
 
@@ -61,13 +63,23 @@ public class Proiettile extends JComponent
   {
     // _vx = (_vx > 5)? 5: _vx;
     // _vy = (_vy > 5)? 5: _vy;
-
+    _px = _x;
+    _py = _y;
     _x  += _vx;
     _y  += _vy;
-    _vx += _ax;
-    _vy += _ay;
+    _vx += (int)_ax*5;
+    _vy += (int)_ay*5;
+    _ax = 0;
+    _ay = 0;
+  }
 
-
+  public int getPX()
+  {
+    return _px;
+  }
+  public int getPY()
+  {
+    return _py;
   }
   public int getX()
   {
@@ -84,15 +96,19 @@ public class Proiettile extends JComponent
   @Override
   protected void paintComponent(Graphics g)
   {
-    g.setColor(Color.WHITE);
+    g.setColor(Color.YELLOW);
     Graphics2D g2 = (Graphics2D)g;
-    Line2D punto = new Line2D.Float(_x,_y,_x,_y);
+    Line2D punto = new Line2D.Float(_x,_y,_px,_py);
+    //Line2D punto = new Line2D.Float(_x,_y,_x,_y);
+
     g2.draw(punto);
   }
   @Override
   public Dimension getPreferredSize()
   {
-    return new Dimension(1,1);
+    int distx = Math.abs(_px-_x);
+    int disty = Math.abs(_py-_y);
+    return new Dimension(distx,disty);
   }
   public boolean Hit(Nave nave)
   {

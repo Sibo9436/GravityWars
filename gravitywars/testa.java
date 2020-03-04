@@ -24,6 +24,7 @@ import java.awt.Graphics2D;
 
 public class testa
 {
+
   public static void main(String[] args)
   {
     SwingUtilities.invokeLater(new Runnable()
@@ -37,21 +38,26 @@ public class testa
 
   private static void Loop()
   {
-    JFrame frame = new JFrame("TESTA");
+    JFrame frame = new JFrame("GravityWars");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.add(new Pannello());
     frame.pack();
     frame.setVisible(true);
   }
 }
+// class Texta extends JPanel
+// {
+//   JTextArea testo = new JTextArea(20, 5);
+// }
 
 class Pannello extends JPanel implements ActionListener
 {
+
   private int _counter = 0;
   private int _focus = 0;
   private Nave _ships[];
   private Proiettile pew;
-  private Timer time = new Timer(1,this);
+  private Timer time = new Timer(17,this);
   private Sfera ball[] = new Sfera[5];
   private int _hheigth = 400;
   private int _hwidth = 610;
@@ -182,7 +188,9 @@ class Pannello extends JPanel implements ActionListener
       }else {
         pew.Forze(ball);
         pew.Update();
-        repaint(pew.getX(),pew.getY(),1,1);
+        //repaint(pew.getX(),pew.getY(),pew.getPX(),pew.getPY());
+        repaint(pew.getX(),pew.getY(),pew.getPX(),pew.getPY());
+        //repaint();
       }
     }
   }

@@ -32,11 +32,11 @@ public class Sfera extends JComponent
   {
     _x = (int)(Math.random() * 1080);
     _y = (int)(Math.random() * 720);
-    _r = (int)(Math.random() * 90 + 10);
+    _r = (int)(Math.random() * 140 + 10);
     // _r = (int)(Math.random() * (71492680 - 2439640) + 2439640);
-    _m = (int)(Math.random() * (500 - 100) + 100);
+    _m = (int)(Math.random() * (1000 - 100) + 100);
     // rag = 90*(_r-2439640/(71492680 - 2439640))+10
-    float col = (_m-100)/(400);
+    float col = (_m-100)/(900);
     colore = new Color(col,0,1-col);
   }
   @Override
